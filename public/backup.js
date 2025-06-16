@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let isValidationInProgress = false;
 
   const validateServiceAccountUrl =
-    "http://localhost:8787/validate-service-account";
-  const backupEndpoint = "http://localhost:8787/backup";
+    "https://firestore-upload-backup-be.revanspstudy28.workers.dev/validate-service-account";
+  const backupEndpoint = "https://firestore-upload-backup-be.revanspstudy28.workers.dev/backup";
 
   function showBackupStatusBadge(type, message) {
     backupServiceAccountStatus.classList.remove(

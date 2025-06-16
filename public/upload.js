@@ -8,8 +8,8 @@ const statusMessage = document.getElementById("statusMessage");
 let isServiceAccountValid = false;
 
 const validateServiceAccountUrl =
-  "http://localhost:8787/validate-service-account";
-const uploadCollectionUrl = "http://localhost:8787/upload-collection";
+  "https://firestore-upload-backup-be.revanspstudy28.workers.dev/validate-service-account";
+const uploadCollectionUrl = "https://firestore-upload-backup-be.revanspstudy28.workers.dev/upload-collection";
 
 function showStatusBadge(type, message) {
   serviceAccountStatus.classList.remove(
