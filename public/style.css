@@ -1,0 +1,15 @@
+* {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.zoom {
+    zoom: 0.8;
+}
+
+.firebase-accent-grid {
+    background-color: #FFF8E1;
+    background-image:
+        linear-gradient(rgba(255, 145, 0, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(221, 44, 0, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
