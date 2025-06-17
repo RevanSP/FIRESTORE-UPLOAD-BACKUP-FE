@@ -23,14 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let collectionsData = [];
   let currentPage = 1;
-  const itemsPerPage = 5;
+  const itemsPerPage = 4;
   let selectedCollections = new Set();
   let isServiceAccountValidBackup = false;
   let isValidationInProgress = false;
 
   const validateServiceAccountUrl =
-    "https://firestore-upload-backup-be.revanspstudy28.workers.dev/validate-service-account";
-  const backupEndpoint = "https://firestore-upload-backup-be.revanspstudy28.workers.dev/backup";
+    "http://127.0.0.1:8787/validate-service-account";
+  const backupEndpoint = "http://127.0.0.1:8787/backup";
 
   function showBackupStatusBadge(type, message) {
     backupServiceAccountStatus.classList.remove(
@@ -157,54 +157,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleSubmitButton();
 
-  document
-    .getElementById("uploadForm")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
+ document
+  .getElementById("uploadForm")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-      if (!isServiceAccountValidBackup || isValidationInProgress) {
-        alert("Please wait for service account validation to complete.");
-        return;
+    if (!isServiceAccountValidBackup || isValidationInProgress) {
+      alert("Please wait for service account validation to complete.");
+      return;
+    }
+
+    showBackupStatusBadge("hide");
+
+    submitButton.innerHTML =
+      '<span class="loading loading-bars loading-xs"></span>';
+    submitButton.disabled = true;
+
+    const formData = new FormData();
+    formData.append("credentialsFile", fileInput.files[0]);
+
+    try {
+      const response = await fetch(backupEndpoint, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      submitButton.innerHTML = originalButtonText;
+
+      if (data.success) {
+        collectionsData = data.collections.map((entry) => ({
+          name: entry.collection,
+          data: entry.documents,
+        }));
+        updateCollectionsList();
+        updatePagination();
+      } else {
+        alert(
+          "Error: " +
+            data.message +
+            (data.details ? ` Details: ${data.details}` : "")
+        );
       }
-
-      submitButton.innerHTML =
-        '<span class="loading loading-bars loading-xs"></span>';
-      submitButton.disabled = true;
-
-      const formData = new FormData();
-      formData.append("credentialsFile", fileInput.files[0]);
-
-      try {
-        const response = await fetch(backupEndpoint, {
-          method: "POST",
-          body: formData,
-        });
-
-        const data = await response.json();
-        submitButton.innerHTML = originalButtonText;
-
-        if (data.success) {
-          collectionsData = data.collections.map((entry) => ({
-            name: entry.collection,
-            data: entry.documents,
-          }));
-          updateCollectionsList();
-          updatePagination();
-        } else {
-          alert(
-            "Error: " +
-              data.message +
-              (data.details ? ` Details: ${data.details}` : "")
-          );
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred while processing the request.");
-      } finally {
-        submitButton.innerHTML = originalButtonText;
-        toggleSubmitButton();
-      }
-    });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while processing the request.");
+    } finally {
+      submitButton.innerHTML = originalButtonText;
+      toggleSubmitButton();
+    }
+  });
 
   function convertToCsv(data) {
     if (!data || data.length === 0) {
