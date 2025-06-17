@@ -29,13 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let isValidationInProgress = false;
 
   const validateServiceAccountUrl =
-    "http://127.0.0.1:8787/validate-service-account";
-  const backupEndpoint = "http://127.0.0.1:8787/backup";
+    "https://firestore-upload-backup-be.revanspstudy28.workers.dev/validate-service-account";
+  const backupEndpoint = "https://firestore-upload-backup-be.revanspstudy28.workers.dev/backup";
 
   function showBackupStatusBadge(type, message) {
     backupServiceAccountStatus.classList.remove(
       "hidden",
-      "alert-info",
+      "alert-info", 
       "alert-success",
       "alert-error"
     );
