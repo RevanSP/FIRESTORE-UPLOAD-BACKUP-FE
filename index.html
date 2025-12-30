@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FIRESTORE UPLOAD & BACKUP</title>
     <link rel="icon" type="image/png" href="public/favicon.png" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="public/style.css" />
@@ -33,22 +33,24 @@
             <img src="public/tutorial.avif" alt="IMG" class="rounded-xl border-2 border-black" />
         </div>
     </dialog>
-    <div class="zoom w-full max-w-3xl px-6 lg:px-0">
+    <div class="w-full max-w-4xl px-6 lg:px-0">
         <div role="tablist" class="tabs tabs-bordered shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black">
-            <input type="radio" name="firestore" role="tab" class="tab" aria-label="UPLOAD" checked />
+            <input type="radio" name="firestore" role="tab" class="tab !text-xs" aria-label="UPLOAD" checked />
             <div role="tabpanel" class="tab-content bg-base-100 border-base-300">
                 <div class="card bg-base-100">
-                    <div class="card-body p-6">
-                        <div class="flex justify-center my-3">
-                            <img src="public/Firebase.avif" class="w-56 md:w-80" />
+                    <div class="card-body px-5.5 py-6">
+                        <div class="flex justify-center my-5">
+                            <img src="public/Firebase.avif" class="w-40 md:w-64" />
                         </div>
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text">SERVICE ACCOUNT KEY</span>
-                                <span class="label-text-alt">JSON</span>
+                                <span class="label-text text-xs">SERVICE ACCOUNT KEY</span>
+                                <span class="label-text-alt text-xs">JSON</span>
                             </div>
-                            <input id="serviceAccountInput" type="file"
-                                class="file-input bg-[#FFF8E1] file-input-bordered file-input-sm text-xs w-full border-2 rounded-none border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                            <input id="serviceAccountInput" type="file" class="file-input bg-[#FFF8E1] file-input-bordered file-input-sm text-xs w-full border-2 rounded-none border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
                                 accept=".json" required />
                         </label>
                         <div id="serviceAccountStatus"
@@ -61,41 +63,50 @@
                         <div class="flex items-center space-x-4 mt-2">
                             <label class="form-control w-full">
                                 <div class="label">
-                                    <span class="label-text">COLLECTION</span>
-                                    <span class="label-text-alt">JSON</span>
+                                    <span class="label-text text-xs">COLLECTION</span>
+                                    <span class="label-text-alt text-xs">JSON</span>
                                 </div>
-                                <input id="collectionInput" type="file"
-                                    class="file-input bg-[#FFF8E1] file-input-bordered file-input-sm text-xs w-full border-2 rounded-none border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                                <input id="collectionInput" type="file" class="file-input bg-[#FFF8E1] file-input-bordered file-input-sm text-xs w-full border-2 rounded-none border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
                                     accept=".json" required multiple disabled />
                             </label>
                             <button onclick="question.showModal()"
-                                class="btn rounded-none btn-sm text-xs border-2 btn-square bg-[#FFF8E1] border-black border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] mt-9">
+                                class="btn rounded-none btn-sm text-xs border-2 btn-square bg-[#FFF8E1] border-black border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] mt-5.5">
                                 <i class="bi bi-question-circle"></i>
                             </button>
                             <button id="uploadButton"
-                                class="btn rounded-none btn-sm text-xs btn-square border-2 bg-[#FFF8E1] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] mt-9"
-                                disabled>
+                                class="btn rounded-none btn-sm text-xs btn-square border-2 bg-[#FFF8E1] border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] mt-5.5" disabled>
                                 <i class="bi bi-cloud-upload"></i>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <input type="radio" name="firestore" role="tab" class="tab" aria-label="BACKUP" />
+            <input type="radio" name="firestore" role="tab" class="tab !text-xs" aria-label="BACKUP" />
             <div role="tabpanel" class="tab-content bg-base-100 border-base-300 p-0">
                 <div class="card bg-base-100">
                     <div class="card-body p-6">
-                       <div class="flex justify-center my-3">
-                            <img src="public/Firebase.avif" class="w-56 md:w-80" />
+                        <div class="flex justify-center my-3">
+                            <img src="public/Firebase.avif" class="w-40 md:w-64" />
                         </div>
                         <form id="uploadForm" enctype="multipart/form-data">
                             <label class="form-control w-full">
                                 <div class="label">
-                                    <span class="label-text">SERVICE ACCOUNT KEY</span>
-                                    <span class="label-text-alt">JSON</span>
+                                    <span class="label-text text-xs">SERVICE ACCOUNT KEY</span>
+                                    <span class="label-text-alt text-xs">JSON</span>
                                 </div>
-                                <input type="file"
-                                    class="file-input file-input-bordered bg-[#FFF8E1] file-input-sm text-xs w-full border-2 rounded-none border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                                <input type="file" class="file-input file-input-bordered bg-[#FFF8E1] file-input-sm text-xs w-full border-2 rounded-none border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
                                     name="jsonFile" id="jsonFile" accept=".json" required />
                             </label>
                             <div id="backupServiceAccountStatus"
@@ -107,7 +118,10 @@
                                 </div>
                             </div>
                             <button type="submit"
-                                class="btn bg-[#FFF8E1] w-full btn-sm text-xs border-2 rounded-none border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] mt-4"
+                                class="btn bg-[#FFF8E1] w-full btn-sm text-xs border-2 rounded-none border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] mt-4"
                                 id="submitButton" disabled>
                                 SUBMIT
                             </button>
@@ -164,15 +178,20 @@
                         <div class="join w-full mt-3">
                             <div class="w-full">
                                 <div>
-                                    <button
-                                        class="bg-[#FFF8E1] btn-sm text-xs btn w-full rounded-none border-2 join-item border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                                    <button class="bg-[#FFF8E1] btn-sm text-xs btn w-full rounded-none border-2 join-item border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
                                         id="downloadSelectedButton" disabled>
                                         DOWNLOAD SELECTED COLLECTIONS
                                     </button>
                                 </div>
                             </div>
                             <select
-                                class="select select-bordered select-sm text-xs join-item border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-[#FFF8E1] rounded-none"
+                                class="select select-bordered select-sm text-xs join-item border-2 border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-[#FFF8E1] rounded-none"
                                 id="bulkDownloadFormat">
                                 <option value="json" selected>JSON</option>
                                 <option value="csv">CSV</option>
@@ -181,12 +200,15 @@
                     </div>
                 </div>
             </div>
-            <input type="radio" name="firestore" role="tab" class="tab" aria-label="DEV" />
+            <input type="radio" name="firestore" role="tab" class="tab !text-xs" aria-label="DEV" />
             <div role="tabpanel" class="tab-content bg-base-100 border-base-300 p-2">
                 <div class="card bg-base-100">
                     <div class="card-body">
                         <a href="https://www.instagram.com/m9nokuro"
-                            class="btn w-full bg-[#FFF8E1] border-2 rounded-none border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                            class="btn w-full bg-[#FFF8E1] border-2 rounded-none border-black   transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] btn-sm text-xs">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-instagram" viewBox="0 0 16 16">
                                 <path
@@ -194,15 +216,20 @@
                             </svg>
                             @m9nokuro</a>
                         <a href="https://web.facebook.com/profile.php?id=100082958149027&_rdc=1&_rdr"
-                            class="btn w-full bg-[#FFF8E1] border-2 rounded-none border-black mt-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-facebook" viewBox="0 0 16 16">
+                            class="btn w-full bg-[#FFF8E1] border-2 rounded-none border-black mt-4  btn-sm text-xs  transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
                                 <path
                                     d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
                             </svg>
                             @Reiivan</a>
                         <a href="https://github.com/RevanSP"
-                            class="btn w-full bg-[#FFF8E1] border-2 rounded-none border-black mt-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"><svg
+                            class="btn w-full bg-[#FFF8E1] border-2 rounded-none border-black mt-4   btn-sm text-xs transition-all duration-200 ease-in-out
+        hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        hover:translate-x-[5px] hover:translate-y-[5px]
+        active:shadow-none active:translate-x-[6px] active:translate-y-[6px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-github" viewBox="0 0 16 16">
                                 <path
